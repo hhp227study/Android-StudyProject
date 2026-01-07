@@ -16,9 +16,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -41,6 +43,7 @@ import com.hhp227.runningtracker.ui.theme.RunningTrackerTheme
 import com.hhp227.runningtracker.util.Constants.MAP_ZOOM
 import com.hhp227.runningtracker.util.Constants.POLYLINE_COLOR
 import com.hhp227.runningtracker.util.Constants.POLYLINE_WIDTH
+import com.hhp227.runningtracker.util.Constants.BATTERY_LOW_THRESHOLD_START
 import com.hhp227.runningtracker.util.TrackingUtility
 import timber.log.Timber
 
@@ -142,6 +145,7 @@ fun RunningScreen(
     val timeRun by timeRunInMillis.observeAsState(initial = 0L)
 
     var showFinishDialog by remember { mutableStateOf(false) }
+    var showBatteryLowWarning by remember { mutableStateOf(false) }
 
     // 맵 카메라 상태
     val cameraPositionState = rememberCameraPositionState {
@@ -186,7 +190,13 @@ fun RunningScreen(
             if (!isTracking) { // 시작 또는 재시작 버튼
                 Button(onClick = {
                     activity.checkGpsAndPrompt() // GPS 켜짐 확인
-                    activity.sendCommandToService(TrackingService.ACTION_START_OR_RESUME_SERVICE)
+
+                    val batteryLevel = TrackingUtility.getBatteryLevel(activity)
+                    if (batteryLevel <= BATTERY_LOW_THRESHOLD_START) {
+                        showBatteryLowWarning = true
+                    } else {
+                        activity.sendCommandToService(TrackingService.ACTION_START_OR_RESUME_SERVICE)
+                    }
                 }) {
                     Text(if (timeRun == 0L) "시작" else "재시작")
                 }
@@ -213,6 +223,27 @@ fun RunningScreen(
     if (showFinishDialog) {
         // TODO: 종료 다이얼로그 구현 및 종료 시 로컬 DB 저장 로직 호출
         // activity.sendCommandToService(TrackingService.ACTION_STOP_SERVICE) 호출 및 DB 저장
+    }
+
+    if (showBatteryLowWarning) {
+        AlertDialog(
+            onDismissRequest = { showBatteryLowWarning = false },
+            title = { Text("배터리 부족 경고") },
+            text = { Text("배터리 잔량이 낮습니다. 계속하시겠습니까?") },
+            confirmButton = {
+                TextButton(onClick = {
+                    showBatteryLowWarning = false
+                    activity.sendCommandToService(TrackingService.ACTION_START_OR_RESUME_SERVICE)
+                }) {
+                    Text("계속")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showBatteryLowWarning = false }) {
+                    Text("취소")
+                }
+            }
+        )
     }
 }
 

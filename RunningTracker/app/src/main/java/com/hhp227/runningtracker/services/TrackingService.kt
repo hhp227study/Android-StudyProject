@@ -9,7 +9,9 @@ import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.location.Location
+import android.os.BatteryManager
 import android.os.Build
 import android.os.Looper
 import androidx.annotation.RequiresPermission
@@ -29,11 +31,13 @@ import com.hhp227.runningtracker.R
 import com.hhp227.runningtracker.services.TrackingService.Companion.ACTION_STOP_SERVICE
 import com.hhp227.runningtracker.util.Constants.FASTEST_LOCATION_INTERVAL
 import com.hhp227.runningtracker.util.Constants.LOCATION_UPDATE_INTERVAL
+import com.hhp227.runningtracker.util.Constants.BATTERY_CRITICAL_THRESHOLD_STOP
 import com.hhp227.runningtracker.util.TrackingUtility
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import android.content.BroadcastReceiver
 
 typealias Polyline = MutableList<LatLng>
 typealias Polylines = MutableList<Polyline>
@@ -46,6 +50,18 @@ class TrackingService : LifecycleService() {
 
     private var timeRun = 0L
     private var lastSecondTimestamp = 0L
+
+    private val batteryReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (intent?.action == Intent.ACTION_BATTERY_CHANGED) {
+                val batteryLevel = TrackingUtility.getBatteryLevel(applicationContext)
+                if (batteryLevel <= BATTERY_CRITICAL_THRESHOLD_STOP) {
+                    Timber.d("Critical battery level detected: $batteryLevel%. Stopping service.")
+                    killService() // 강제 종료 및 저장
+                }
+            }
+        }
+    }
 
     // 타이머 구현 (간단한 예시)
     private fun startTimer() {
@@ -83,6 +99,14 @@ class TrackingService : LifecycleService() {
             updateLocationTracking(it)
             updateNotificationTrackingState(it) // 알림 업데이트
         }
+
+        // 배터리 리시버 등록
+        registerReceiver(batteryReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(batteryReceiver)
     }
 
     private fun addEmptyPolyline() = pathPoints.value?.apply {
