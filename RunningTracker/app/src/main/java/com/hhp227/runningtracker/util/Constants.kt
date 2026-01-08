@@ -12,4 +12,7 @@ object Constants {
     const val POLYLINE_WIDTH = 8f
     const val MAP_ZOOM = 15f
     const val MAP_PADDING = 100
+
+    const val BATTERY_LOW_THRESHOLD_START = 30
+    const val BATTERY_CRITICAL_THRESHOLD_STOP = 20
 }
