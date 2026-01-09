@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hhp227.recipe.domain.usecase.GetRecipesUseCase
 
-class MainViewModel(
+class SavedRecipeViewModel(
     private val getRecipesUseCase: GetRecipesUseCase
 ) : ViewModel() {
-    private val _uiState = MutableLiveData(MainUiState())
-    val uiState: LiveData<MainUiState> = _uiState
+    private val _uiState = MutableLiveData(SavedRecipeUiState())
+    val uiState: LiveData<SavedRecipeUiState> = _uiState
 
     private fun loadRecipes() {
         _uiState.postValue(uiState.value?.copy(isLoading = true))

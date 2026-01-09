@@ -1,28 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/nav_graph"
-            app:startDestination="@id/FirstFragment">
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/nav_graph"
+            app:startDestination="@id/savedRecipeFragment">
 
-    <fragment
-            android:id="@+id/FirstFragment"
-            android:name="com.hhp227.recipe.FirstFragment"
-            android:label="@string/first_fragment_label"
-            tools:layout="@layout/fragment_first">
-
-        <action
-                android:id="@+id/action_FirstFragment_to_SecondFragment"
-                app:destination="@id/SecondFragment"/>
+    <fragment android:id="@+id/savedRecipeFragment"
+              android:name="com.hhp227.recipe.presentation.savedrecipe.SavedRecipeFragment"
+              android:label="fragment_saved_recipe" tools:layout="@layout/fragment_saved_recipe">
+        <action android:id="@+id/action_savedRecipeFragment_to_recipeDetailFragment"
+                app:destination="@id/recipeDetailFragment"/>
     </fragment>
-    <fragment
-            android:id="@+id/SecondFragment"
-            android:name="com.hhp227.recipe.SecondFragment"
-            android:label="@string/second_fragment_label"
-            tools:layout="@layout/fragment_second">
-
-        <action
-                android:id="@+id/action_SecondFragment_to_FirstFragment"
-                app:destination="@id/FirstFragment"/>
+    <fragment android:id="@+id/recipeDetailFragment"
+              android:name="com.hhp227.recipe.presentation.recipedetail.RecipeDetailFragment"
+              android:label="fragment_recipe_detail" tools:layout="@layout/fragment_recipe_detail">
+        <argument android:name="recipeId" app:argType="integer"/>
     </fragment>
 </navigation>
