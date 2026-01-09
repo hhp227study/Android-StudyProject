@@ -1,10 +1,11 @@
-package com.hhp227.recipe
+package com.hhp227.recipe.presentation.savedrecipe
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hhp227.recipe.data.Recipe
 import com.hhp227.recipe.databinding.ItemRecipeBinding
 
 class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(ItemDiffCallback()) {

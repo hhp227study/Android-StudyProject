@@ -1,17 +1,30 @@
-package com.hhp227.recipe
+package com.hhp227.recipe.presentation.savedrecipe
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.hhp227.recipe.data.Recipe
+import com.hhp227.recipe.data.datasource.local.RecipeDataSourceImpl
+import com.hhp227.recipe.data.repository.RecipeRepositoryImpl
 import com.hhp227.recipe.databinding.ActivityMainBinding
+import com.hhp227.recipe.domain.usecase.GetRecipesUseCase
+import com.hhp227.recipe.presentation.recipedetail.RecipeDetailActivity
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     val binding get() = requireNotNull(_binding)
 
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels {
+        object : ViewModelProvider.NewInstanceFactory() {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T & Any {
+                return MainViewModel(GetRecipesUseCase(RecipeRepositoryImpl(RecipeDataSourceImpl()))) as (T & Any)
+            }
+        }
+    }
 
     private val adapter = RecipeAdapter()
 
@@ -46,8 +59,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun subscribeUi() {
-        viewModel.recipe.observe(this) { recipes ->
-            adapter.submitList(recipes)
+        viewModel.uiState.observe(this) { state ->
+            adapter.submitList(state.recipes)
         }
     }
 }

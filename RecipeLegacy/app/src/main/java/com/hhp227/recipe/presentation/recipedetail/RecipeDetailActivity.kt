@@ -1,4 +1,4 @@
-package com.hhp227.recipe
+package com.hhp227.recipe.presentation.recipedetail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

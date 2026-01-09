@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@android:color/white"
-        tools:context=".MainActivity">
+        tools:context=".presentation.savedrecipe.MainActivity">
 
     <TextView
             android:id="@+id/tv_title"

@@ -1,4 +1,4 @@
-package com.hhp227.recipe
+package com.hhp227.recipe.data
 
 data class Recipe(
     val id: Int,

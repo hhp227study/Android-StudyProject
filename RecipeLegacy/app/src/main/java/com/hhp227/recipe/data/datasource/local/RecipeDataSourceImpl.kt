@@ -1,16 +1,10 @@
-package com.hhp227.recipe
+package com.hhp227.recipe.data.datasource.local
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.hhp227.recipe.data.Recipe
+import com.hhp227.recipe.data.datasource.RecipeDataSource
 
-class MainViewModel : ViewModel() {
-    private val _recipes = MutableLiveData(generateDummyRecipes())
-    val recipe: LiveData<List<Recipe>> = _recipes
-
-    private fun generateDummyRecipes(): List<Recipe> {
-        // 실제 프로젝트에서는 R.drawable.image_name 형태의 리소스 ID를 사용합니다.
-        // 여기서는 임시 값 0을 사용했습니다.
+class RecipeDataSourceImpl : RecipeDataSource {
+    override fun getRecipes(): List<Recipe> {
         return listOf(
             Recipe(
                 id = 0,

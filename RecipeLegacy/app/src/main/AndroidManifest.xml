@@ -12,10 +12,10 @@
             android:theme="@style/Theme.Recipe"
             tools:targetApi="31">
         <activity
-                android:name=".RecipeDetailActivity"
+                android:name=".presentation.recipedetail.RecipeDetailActivity"
                 android:exported="false"/>
         <activity
-                android:name=".MainActivity"
+                android:name=".presentation.savedrecipe.MainActivity"
                 android:exported="true"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.Recipe">
