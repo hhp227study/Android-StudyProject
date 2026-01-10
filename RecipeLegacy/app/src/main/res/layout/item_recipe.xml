@@ -1,123 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
-        android:foreground="?android:attr/selectableItemBackground">
+        xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="200dp">
-        <ImageView
-            android:id="@+id/img_recipe_photo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:contentDescription="Recipe photo" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:foreground="?android:attr/selectableItemBackground">
 
-        <View
+        <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#66000000"/>
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
-
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rating_background"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical">
-                <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:src="@drawable/ic_star"
-                        android:contentDescription="Rating star"/>
-                <TextView
-                        android:id="@+id/tv_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="4.0"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:textStyle="bold"
-                        android:layout_marginStart="4dp"/>
-            </LinearLayout>
-
-            <LinearLayout
+                android:layout_height="200dp">
+            <ImageView
+                    android:id="@+id/img_recipe_photo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="80dp">
-                <TextView
-                    android:id="@+id/tv_recipe_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Traditional spare ribs baked"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/white"
-                    android:textStyle="bold"/>
-                <TextView
-                        android:id="@+id/tv_chef_name"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Recipe photo" />
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#66000000"/>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
+
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="by Chef John"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:alpha="0.8"/>
-            </LinearLayout>
+                        android:orientation="horizontal"
+                        android:background="@drawable/rating_background"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical">
+                    <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:src="@drawable/ic_star"
+                            android:contentDescription="Rating star"/>
+                    <TextView
+                            android:id="@+id/tv_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4.0"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:layout_marginStart="4dp"/>
+                </LinearLayout>
 
-            <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center_vertical">
-                <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:src="@drawable/ic_timer"
-                        android:contentDescription="Cooking time icon"/>
-                <TextView
-                        android:id="@+id/tv_cook_time"
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="80dp">
+                    <TextView
+                            android:id="@+id/tv_recipe_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Traditional spare ribs baked"
+                            android:textSize="18sp"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+                    <TextView
+                            android:id="@+id/tv_chef_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="by Chef John"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/white"
+                            android:alpha="0.8"/>
+                </LinearLayout>
+
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="20 min"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/white"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="16dp"/>
-                <ImageView
-                        android:id="@+id/btn_save"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_bookmark"
-                        android:background="@drawable/icon_background_circle"
-                        android:padding="4dp"
-                        android:contentDescription="Save recipe button"/>
-            </LinearLayout>
+                        android:orientation="horizontal"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="center_vertical">
+                    <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_timer"
+                            android:contentDescription="Cooking time icon"/>
+                    <TextView
+                            android:id="@+id/tv_cook_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="20 min"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/white"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="16dp"/>
+                    <ImageView
+                            android:id="@+id/btn_save"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_bookmark"
+                            android:background="@drawable/icon_background_circle"
+                            android:padding="4dp"
+                            android:contentDescription="Save recipe button"/>
+                </LinearLayout>
 
-        </RelativeLayout>
+            </RelativeLayout>
 
-    </FrameLayout>
+        </FrameLayout>
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</layout>
