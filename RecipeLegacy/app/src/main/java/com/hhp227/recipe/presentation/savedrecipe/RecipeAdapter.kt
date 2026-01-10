@@ -22,7 +22,7 @@ class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(ItemDi
         }
 
         init {
-            binding.onItemClickListener = onItemClickListener용
+            binding.onItemClickListener = onItemClickListener
         }
     }
 
