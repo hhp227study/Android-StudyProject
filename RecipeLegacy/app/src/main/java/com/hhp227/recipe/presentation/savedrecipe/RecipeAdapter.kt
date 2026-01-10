@@ -16,20 +16,13 @@ class RecipeAdapter : ListAdapter<Recipe, RecipeAdapter.RecipeViewHolder>(ItemDi
     inner class RecipeViewHolder(private val binding: ItemRecipeBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(recipe: Recipe) {
-            binding.imgRecipePhoto.setImageResource(recipe.imageUrl)
-            binding.tvRecipeTitle.text = recipe.title
-            binding.tvChefName.text = "by ${recipe.chefName}"
-            binding.tvCookTime.text = recipe.cookTime
-            binding.tvRating.text = String.format("%.1f", recipe.rating)
+            binding.recipe = recipe
+
+            binding.executePendingBindings()
         }
 
         init {
-            binding.root.setOnClickListener {
-                onItemClickListener.onDetailClick(getItem(adapterPosition))
-            }
-            binding.btnSave.setOnClickListener {
-                onItemClickListener.onSaveClick(getItem(adapterPosition))
-            }
+            binding.onItemClickListener = onItemClickListener용
         }
     }
 

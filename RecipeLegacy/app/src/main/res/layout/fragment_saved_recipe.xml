@@ -5,6 +5,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".presentation.savedrecipe.SavedRecipeFragment">
 
+    <data>
+        <variable
+                name="viewModel"
+                type="com.hhp227.recipe.presentation.savedrecipe.SavedRecipeViewModel" />
+    </data>
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -32,6 +38,7 @@
                 android:paddingEnd="8dp"
                 android:clipToPadding="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:submitList="@{viewModel.uiState.recipes}"
                 tools:listitem="@layout/item_recipe" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -4,6 +4,15 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+                name="recipe"
+                type="com.hhp227.recipe.data.Recipe" />
+        <variable
+                name="onItemClickListener"
+                type="com.hhp227.recipe.presentation.savedrecipe.RecipeAdapter.OnRecipeItemClickListener" />
+    </data>
+
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -13,16 +22,19 @@
             android:layout_marginEnd="8dp"
             app:cardCornerRadius="12dp"
             app:cardElevation="4dp"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="@{() -> onItemClickListener.onDetailClick(recipe)}">
 
         <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
+
             <ImageView
                     android:id="@+id/img_recipe_photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
+                    android:src="@{recipe.imageUrl}"
                     android:contentDescription="Recipe photo" />
 
             <View
@@ -47,20 +59,23 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
                         android:gravity="center_vertical">
+
                     <ImageView
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:src="@drawable/ic_star"
                             android:contentDescription="Rating star"/>
+
                     <TextView
                             android:id="@+id/tv_rating"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4.0"
+                            android:text="@{String.format(`%.1f`, recipe.rating)}"
                             android:textSize="14sp"
                             android:textColor="@android:color/white"
                             android:textStyle="bold"
-                            android:layout_marginStart="4dp"/>
+                            android:layout_marginStart="4dp"
+                            tools:text="4.0" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -69,22 +84,26 @@
                         android:orientation="vertical"
                         android:layout_alignParentBottom="true"
                         android:layout_marginEnd="80dp">
+
                     <TextView
                             android:id="@+id/tv_recipe_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Traditional spare ribs baked"
+                            android:text="@{recipe.title}"
                             android:textSize="18sp"
                             android:textColor="@android:color/white"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            tools:text="Traditional spare ribs baked"/>
+
                     <TextView
                             android:id="@+id/tv_chef_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="by Chef John"
+                            android:text="@{`by ` + recipe.chefName}"
                             android:textSize="14sp"
                             android:textColor="@android:color/white"
-                            android:alpha="0.8"/>
+                            android:alpha="0.8"
+                            tools:text="by Chef John" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -94,20 +113,24 @@
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentEnd="true"
                         android:gravity="center_vertical">
+
                     <ImageView
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:src="@drawable/ic_timer"
                             android:contentDescription="Cooking time icon"/>
+
                     <TextView
                             android:id="@+id/tv_cook_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="20 min"
+                            android:text="@{recipe.cookTime}"
                             android:textSize="14sp"
                             android:textColor="@android:color/white"
                             android:layout_marginStart="4dp"
-                            android:layout_marginEnd="16dp"/>
+                            android:layout_marginEnd="16dp"
+                            tools:text="20 min" />
+
                     <ImageView
                             android:id="@+id/btn_save"
                             android:layout_width="24dp"
@@ -115,7 +138,8 @@
                             android:src="@drawable/ic_bookmark"
                             android:background="@drawable/icon_background_circle"
                             android:padding="4dp"
-                            android:contentDescription="Save recipe button"/>
+                            android:contentDescription="Save recipe button"
+                            android:onClick="@{() -> onItemClickListener.onSaveClick(recipe)}" />
                 </LinearLayout>
 
             </RelativeLayout>
